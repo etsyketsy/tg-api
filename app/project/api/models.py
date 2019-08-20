@@ -46,3 +46,27 @@ class Album(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Vendor(models.Model):
+    name = models.CharField(
+        verbose_name='Vendor',
+        max_length=150,
+        blank=True,
+        null=True,
+    )   
+
+    def __str__(self):
+        return self.name
+
+        
+class Source(models.Model):
+    name = models.CharField(
+        verbose_name='Source',
+        max_length=150,
+        blank=True,
+        null=True,
+    )  
+
+    def __str__(self):
+        return self.name
