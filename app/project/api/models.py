@@ -87,6 +87,29 @@ class Income(models.Model):
     )
     source = models.ManyToManyField('Source')
     vendor = models.ManyToManyField('Vendor')
+    artist = models.ManyToManyField('Artist')
+    album = models.ManyToManyField('Album')
 
     def __str__(self):
         return self.description
+
+
+class Expense(models.Model):
+    description = models.CharField(
+        verbose_name='Description',
+        max_length=200,
+        blank=True,
+        null=True,
+    )
+    amount = models.DecimalField(
+        verbose_name='Amount',
+        max_digits=10,
+        decimal_places=2,
+    )
+    source = models.ManyToManyField('Source')
+    vendor = models.ManyToManyField('Vendor')
+    artist = models.ManyToManyField('Artist')
+    album = models.ManyToManyField('Album')  
+    
+    def __str__(self):
+        return self.name
