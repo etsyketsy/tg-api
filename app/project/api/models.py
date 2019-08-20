@@ -25,3 +25,24 @@ class Artist(models.Model):
         return str(self.name)
 
 
+class Album(models.Model):
+    name = models.CharField(
+        verbose_name='Album Name',
+        max_length=150,
+        blank=True,
+        null=True,
+    )
+    artist = models.ManyToManyField('Artist')
+    release_number = models.IntegerField(
+        verbose_name='Release Number',
+        unique=True,
+        primary_key=True
+    )
+    release_date = models.DateField(
+        verbose_name='Release Date',
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
