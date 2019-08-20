@@ -15,9 +15,10 @@ class Artist(models.Model):
         blank=True,
         null=True
     )
-    current_balance = models.IntegerField(
-        blank=True,
-        null=True,
+    known_balance= models.DecimalField(
+        verbose_name='Current Balance',
+        max_digits=10,
+        decimal_places=2,
         # Update to a calculated field later 
     )
 
@@ -59,7 +60,7 @@ class Vendor(models.Model):
     def __str__(self):
         return self.name
 
-        
+
 class Source(models.Model):
     name = models.CharField(
         verbose_name='Source',
@@ -70,3 +71,22 @@ class Source(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Income(models.Model):
+    description = models.CharField(
+        verbose_name='Description',
+        max_length=200,
+        blank=True,
+        null=True
+    )
+    amount = models.DecimalField(
+        verbose_name='Amount',
+        max_digits=10,
+        decimal_places=2,
+    )
+    source = models.ManyToManyField('Source')
+    vendor = models.ManyToManyField('Vendor')
+
+    def __str__(self):
+        return self.description
