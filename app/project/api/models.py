@@ -112,4 +112,4 @@ class Expense(models.Model):
     album = models.ManyToManyField('Album')  
     
     def __str__(self):
-        return self.name
+        return self.description
