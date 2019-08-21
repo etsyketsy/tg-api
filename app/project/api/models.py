@@ -61,14 +61,23 @@ class Vendor(models.Model):
         return self.name
 
 
-class Source(models.Model):
+class IncomeSource(models.Model):
+    DIGITAL = 'Digital'
+    PHYSICAL = 'Physical'
+    OTHER = 'Other'
+    INCOME_TYPE_CHOICES = (
+            (DIGITAL, DIGITAL),
+            (PHYSICAL, PHYSICAL),
+            (OTHER, OTHER),
+        )
     name = models.CharField(
-        verbose_name='Source',
+        verbose_name='Income Type',
         max_length=150,
+        choices=INCOME_TYPE_CHOICES,
         blank=True,
         null=True,
-    )  
-
+    )
+    
     def __str__(self):
         return self.name
 
@@ -85,11 +94,10 @@ class Income(models.Model):
         max_digits=10,
         decimal_places=2,
     )
-    source = models.ManyToManyField('Source')
-    vendor = models.ManyToManyField('Vendor')
+    source = models.ManyToManyField('IncomeSource')
     artist = models.ManyToManyField('Artist')
     album = models.ManyToManyField('Album')
-
+    
     def __str__(self):
         return self.description
 
@@ -106,7 +114,6 @@ class Expense(models.Model):
         max_digits=10,
         decimal_places=2,
     )
-    source = models.ManyToManyField('Source')
     vendor = models.ManyToManyField('Vendor')
     artist = models.ManyToManyField('Artist')
     album = models.ManyToManyField('Album')  
