@@ -15,11 +15,6 @@ class Artist(models.Model):
         blank=True,
         null=True
     )
-    known_balance= models.DecimalField(
-        verbose_name='Current Balance',
-        max_digits=10,
-        decimal_places=2,
-    )
 
     def __str__(self):
         return str(self.name)
