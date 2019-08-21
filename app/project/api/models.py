@@ -76,23 +76,6 @@ class IncomeSource(models.Model):
         blank=True,
         null=True
     )
-    artist = models.ForeignKey(
-        verbose_name='Artist',
-        related_name='Incomes',
-        to=Artist,
-        on_delete=models.SET_NULL,        
-        blank=True,
-        null=True
-    )
-    album = models.ForeignKey(
-        verbose_name='Album',
-        related_name='Incomes',
-        to=Album,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
-    )
-    
     
     def __str__(self):
         return self.name
@@ -110,9 +93,9 @@ class Income(models.Model):
         max_digits=10,
         decimal_places=2,
     )
-    source = models.ManyToManyField('IncomeSource')
-    artist = models.ManyToManyField('Artist')
-    album = models.ManyToManyField('Album')
+    source = models.ManyToManyField('IncomeSource', blank=True)
+    artist = models.ManyToManyField('Artist', blank=True)
+    album = models.ManyToManyField('Album', blank=True)
     
     def __str__(self):
         return self.description
@@ -130,9 +113,9 @@ class Expense(models.Model):
         max_digits=10,
         decimal_places=2,
     )
-    vendor = models.ManyToManyField('Vendor')
-    artist = models.ManyToManyField('Artist')
-    album = models.ManyToManyField('Album')  
+    vendor = models.ManyToManyField('Vendor', blank=True)
+    artist = models.ManyToManyField('Artist', blank=True)
+    album = models.ManyToManyField('Album', blank=True)  
     
     def __str__(self):
         return self.description
