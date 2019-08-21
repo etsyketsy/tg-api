@@ -19,7 +19,6 @@ class Artist(models.Model):
         verbose_name='Current Balance',
         max_digits=10,
         decimal_places=2,
-        # Update to a calculated field later 
     )
 
     def __str__(self):
@@ -54,7 +53,7 @@ class Vendor(models.Model):
         verbose_name='Vendor',
         max_length=150,
         blank=True,
-        null=True,
+        null=True
     )   
 
     def __str__(self):
@@ -75,8 +74,25 @@ class IncomeSource(models.Model):
         max_length=150,
         choices=INCOME_TYPE_CHOICES,
         blank=True,
-        null=True,
+        null=True
     )
+    artist = models.ForeignKey(
+        verbose_name='Artist',
+        related_name='Incomes',
+        to=Artist,
+        on_delete=models.SET_NULL,        
+        blank=True,
+        null=True
+    )
+    album = models.ForeignKey(
+        verbose_name='Album',
+        related_name='Incomes',
+        to=Album,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
+    
     
     def __str__(self):
         return self.name
