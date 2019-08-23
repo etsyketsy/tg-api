@@ -20,7 +20,8 @@ from rest_framework.documentation import include_docs_urls
 
 tgpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('api/', include('project.api.urls')),
+
     # Documentation
     path('docs/', include_docs_urls(
         title='TG API', 
