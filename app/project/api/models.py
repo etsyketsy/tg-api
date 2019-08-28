@@ -76,6 +76,52 @@ class IncomeSource(models.Model):
         return self.name
 
 
+class ProductVariant(models.Model):
+    product_id = models.CharField(
+        verbose_name='UPC/SKU',
+        max_length=15,
+        blank=True,
+        null=True,
+    )
+    description = models.CharField(
+        verbose_name='Description',
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return self.description
+
+
+class Product(models.Model):
+    product = models.CharField(
+        verbose_name='Product',
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    product_variant = models.ForeignKey(
+        verbose_name='Variant',
+        related_name='Products',
+        to=ProductVariant,
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
+    price = models.FloatField(
+        verbose_name='Price',
+        blank=True,
+        null=True,
+    )
+    artist = models.ManyToManyField('Artist', blank=True)
+    album = models.ManyToManyField('Album', blank=True)
+    vendor = models.ManyToManyField('Vendor', blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Income(models.Model):
     description = models.CharField(
         verbose_name='Description',
@@ -83,14 +129,15 @@ class Income(models.Model):
         blank=True,
         null=True
     )
-    amount = models.DecimalField(
+    amount = models.FloatField(
         verbose_name='Amount',
-        max_digits=10,
-        decimal_places=2,
+        blank=True,
+        null=True,
     )
     source = models.ManyToManyField('IncomeSource', blank=True)
     artist = models.ManyToManyField('Artist', blank=True)
     album = models.ManyToManyField('Album', blank=True)
+    product = models.ManyToManyField('Product', blank=True) 
     
     def __str__(self):
         return self.description
@@ -103,14 +150,15 @@ class Expense(models.Model):
         blank=True,
         null=True,
     )
-    amount = models.DecimalField(
+    amount = models.FloatField(
         verbose_name='Amount',
-        max_digits=10,
-        decimal_places=2,
+        blank=True,
+        null=True,
     )
     vendor = models.ManyToManyField('Vendor', blank=True)
     artist = models.ManyToManyField('Artist', blank=True)
-    album = models.ManyToManyField('Album', blank=True)  
+    album = models.ManyToManyField('Album', blank=True) 
+    product = models.ManyToManyField('Product', blank=True) 
     
     def __str__(self):
         return self.description
