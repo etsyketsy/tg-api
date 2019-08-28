@@ -89,13 +89,18 @@ class ProductVariant(models.Model):
         blank=True,
         null=True,
     )
+    price = models.FloatField(
+        verbose_name='Price',
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.description
 
 
 class Product(models.Model):
-    product = models.CharField(
+    name = models.CharField(
         verbose_name='Product',
         max_length=100,
         blank=True,
@@ -106,11 +111,6 @@ class Product(models.Model):
         related_name='Products',
         to=ProductVariant,
         on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-    )
-    price = models.FloatField(
-        verbose_name='Price',
         blank=True,
         null=True,
     )
