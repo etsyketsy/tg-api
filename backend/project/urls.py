@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
+from rest_framework_simplejwt import views as jwt_views
 
 
 tgpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('project.api.urls')),
+
+    # Authentication
+    path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/verify/', jwt_views.TokenVerifyView.as_view(), name='token_refresh'),
 
     # Documentation
     path('docs/', include_docs_urls(
