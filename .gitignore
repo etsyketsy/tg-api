@@ -78,3 +78,4 @@ yarn-error.log*
 /.changelog
 .npm/
 package-lock.json
+yarn.lock
