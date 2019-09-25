@@ -12,4 +12,4 @@ class ArtistSerializer(serializers.ModelSerializer):
 class ReleaseSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Release
-        fields = ['name', 'artist', 'release_number', 'id']
+        fields = ['name', 'artist', 'release_number']

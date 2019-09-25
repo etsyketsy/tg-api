@@ -40,7 +40,5 @@ class CreateReleaseView(CreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Release.objects.all()
 
-    def perform_create(self, request, serializer):
-        return serializer.save(
-            artist=Artist.objects.filter(name=[request.artist])
-        )
+    def perform_create(self, serializer):
+        return serializer.save()
