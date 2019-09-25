@@ -20,9 +20,9 @@ class Artist(models.Model):
         return str(self.name)
 
 
-class Album(models.Model):
+class Release(models.Model):
     name = models.CharField(
-        verbose_name='Album Name',
+        verbose_name='Release Name',
         max_length=150,
         blank=True,
         null=True,
@@ -115,7 +115,7 @@ class Product(models.Model):
         null=True,
     )
     artist = models.ManyToManyField('Artist', blank=True)
-    album = models.ManyToManyField('Album', blank=True)
+    release = models.ManyToManyField('Release', blank=True)
     vendor = models.ManyToManyField('Vendor', blank=True)
 
     def __str__(self):
@@ -136,7 +136,7 @@ class Income(models.Model):
     )
     source = models.ManyToManyField('IncomeSource', blank=True)
     artist = models.ManyToManyField('Artist', blank=True)
-    album = models.ManyToManyField('Album', blank=True)
+    release = models.ManyToManyField('Release', blank=True)
     product = models.ManyToManyField('Product', blank=True) 
     
     def __str__(self):
@@ -157,7 +157,7 @@ class Expense(models.Model):
     )
     vendor = models.ManyToManyField('Vendor', blank=True)
     artist = models.ManyToManyField('Artist', blank=True)
-    album = models.ManyToManyField('Album', blank=True) 
+    release = models.ManyToManyField('Release', blank=True) 
     product = models.ManyToManyField('Product', blank=True) 
     
     def __str__(self):
