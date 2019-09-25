@@ -29,3 +29,19 @@ class CreateArtistView(CreateAPIView):
 class AllReleasesView(ListAPIView):
     serializer_class = ReleaseSerializer
     queryset = Release.objects.all()
+
+
+class CreateReleaseView(CreateAPIView):
+    """
+    api/release/new/
+    POST: user can create a new Release entry by sending post data
+    """
+    serializer_class = ReleaseSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Release.objects.all()
+
+    def perform_create(self, request, serializer):
+        
+        return serializer.save(
+            artist=Artist.objects.filter(name=[request.artist])
+        )

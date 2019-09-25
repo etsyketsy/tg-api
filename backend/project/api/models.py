@@ -38,10 +38,9 @@ class Release(models.Model):
         blank=True,
         null=True
     )
-
+    
     def __str__(self):
-        return self.name
-
+        return str(self.name)
 
 class Vendor(models.Model):
     name = models.CharField(

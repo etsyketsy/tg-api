@@ -4,6 +4,7 @@ from project.api.views import (
     AllArtistsView,
     CreateArtistView, 
     AllReleasesView,
+    CreateReleaseView,
 )
     
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path('artist/new/', CreateArtistView.as_view(), name='new_artist'),
 
     path('release/', AllReleasesView.as_view(), name='release_list'),
+    path('release/new/', CreateReleaseView.as_view(), name='new_release'),
 ]
