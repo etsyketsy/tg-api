@@ -2,45 +2,75 @@ from django.db import models
 from django.conf import settings
 
 
-class Artist(models.Model):
-    name = models.CharField(
-        verbose_name='Artist Name',
-        max_length=150,
-        blank=False,
-        null=False,
-    )
-    tag = models.CharField(
-        verbose_name='Artist Tag',
-        max_length=5,
-        blank=True,
-        null=True
-    )
+class ArtistLink(models.Model):
+    artist_nice_name = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    url = models.CharField(max_length=240, blank=True, null=True)
+    type = models.CharField(max_length=20, blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    artist = models.ManyToManyField('Artist', related_name='links', blank=True)
+
+    class Meta:
+        db_table = 'artist_links'
 
     def __str__(self):
-        return str(self.name)
+        return (self.artist_nice_name + '/ ' + self.name)
 
+
+class Artist(models.Model):
+    artist  = models.CharField(max_length=50)
+    artist_location = models.CharField(max_length=50, blank=True, null=True)
+    artist_bio = models.TextField(blank=True, null=True)
+    artist_nice_name = models.CharField(max_length=50, blank=True, null=True)
+    artist_type = models.CharField(max_length=20)
+    artist_contact = models.CharField(max_length=50)
+    status = models.CharField(max_length=12)
+    id = models.AutoField(primary_key=True)
+
+    class Meta:
+        db_table = 'artists'
+    
+    def __str__(self):
+        return self.artist
+
+
+class ReleaseLink(models.Model):
+    cat_num = models.CharField(max_length=6, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    url = models.CharField(max_length=240, blank=True, null=True)
+    type = models.CharField(max_length=20, blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    release = models.ManyToManyField('Release', related_name='links', blank=True)
+    
+    class Meta:
+        db_table = 'release_links'
+
+    def __str__(self):
+        return (self.cat_num + "/ " + self.name)
 
 class Release(models.Model):
-    name = models.CharField(
-        verbose_name='Release Name',
-        max_length=150,
-        blank=True,
-        null=True,
-    )
-    artist = models.ManyToManyField('Artist')
-    release_number = models.IntegerField(
-        verbose_name='Release Number',
-        unique=True,
-        primary_key=True
-    )
-    release_date = models.DateField(
-        verbose_name='Release Date',
-        blank=True,
-        null=True
-    )
+    row = models.CharField(max_length=3)
+    cat_num = models.CharField(max_length=6)
+    fk_artist = models.CharField(max_length=50, blank=True)  # Field name made lowercase.
+    release_title = models.CharField(max_length=80, blank=True, null=True)
+    release_formats = models.CharField(max_length=24, blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    artist_nice_name = models.CharField(max_length=50)
+    tracklisting = models.TextField()
+    bio = models.TextField()
+    ffo = models.TextField()
+    target_markets = models.TextField()
+    upc = models.CharField(max_length=13)
+    status = models.CharField(max_length=20)
+    mediaplayer_html = models.TextField(blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    artist = models.ManyToManyField('Artist', related_name='releases', blank=True)
+    
+    class Meta:
+        db_table = 'releases'
 
     def __str__(self):
-        return self.name
+        return self.cat_num
 
 
 class Vendor(models.Model):
@@ -50,9 +80,6 @@ class Vendor(models.Model):
         blank=True,
         null=True
     )   
-
-    def __str__(self):
-        return self.name
 
 
 class IncomeSource(models.Model):
