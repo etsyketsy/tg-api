@@ -30,7 +30,7 @@ tgpatterns = [
 
     # Documentation
     path('docs/', include_docs_urls(
-        title='TG API', 
+        title='TG Info', 
         public=True,
         authentication_classes=[],
         permission_classes=[])
