@@ -59,6 +59,7 @@ coverage.xml
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+*.code-workspace
 
 # General #
 node_modules
