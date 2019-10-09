@@ -26,6 +26,7 @@ class Artist(models.Model):
     artist_contact = models.CharField(max_length=50)
     status = models.CharField(max_length=12)
     id = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to='artists', blank=True, null=True)
 
     class Meta:
         db_table = 'artists'
@@ -65,6 +66,7 @@ class Release(models.Model):
     mediaplayer_html = models.TextField(blank=True, null=True)
     id = models.AutoField(primary_key=True)
     artist = models.ManyToManyField('Artist', related_name='releases', blank=True)
+    image = models.ImageField(upload_to='releases/', blank=True, null=True)
     
     class Meta:
         db_table = 'releases'
