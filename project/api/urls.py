@@ -5,6 +5,7 @@ from project.api.views import (
     CreateArtistView, 
     AllReleasesView,
     CreateReleaseView,
+    ReleaseByCatalogNumView
 )
     
 
@@ -16,4 +17,6 @@ urlpatterns = [
 
     path('release/', AllReleasesView.as_view(), name='release_list'),
     path('release/new/', CreateReleaseView.as_view(), name='new_release'),
+    path('release/<int:pk>/', ReleaseByCatalogNumView.as_view(), name='release_by_cat_num'),
+
 ]

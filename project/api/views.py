@@ -42,3 +42,15 @@ class CreateReleaseView(CreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save()
+
+class ReleaseByCatalogNumView(ListAPIView):
+    """
+    api/release/cat_num/
+    GET: access rele
+    """
+    serializer_class = ReleaseSerializer
+    
+    def get_queryset(self):
+        raw_num = str(self.kwargs['pk'])
+        cat_num = 'TG-0'+raw_num
+        return Release.objects.filter(cat_num=cat_num)
