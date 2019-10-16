@@ -43,10 +43,11 @@ class CreateReleaseView(CreateAPIView):
     def perform_create(self, serializer):
         return serializer.save()
 
-class ReleaseByCatalogNumView(ListAPIView):
+
+class ReleaseByCatNumView(ListAPIView):
     """
     api/release/cat_num/
-    GET: access rele
+    GET: access release by cataloge number
     """
     serializer_class = ReleaseSerializer
     
@@ -54,3 +55,15 @@ class ReleaseByCatalogNumView(ListAPIView):
         raw_num = str(self.kwargs['pk'])
         cat_num = 'TG-0'+raw_num
         return Release.objects.filter(cat_num=cat_num)
+
+
+class ArtistByNiceNameView(ListAPIView):
+    """
+    api/artist/nice_name/
+    GET: access artist by nice name slug
+    """
+    serializer_class = ArtistSerializer
+    
+    def get_queryset(self):
+        slug = self.kwargs['pk']
+        return Artist.objects.filter(artist_nice_name=slug)
