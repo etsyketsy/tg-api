@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView,     RetrieveAPIView 
 
 from project.api.serializers import ArtistSerializer, ReleaseSerializer
 from project.api.models import Artist, Release
@@ -45,7 +45,7 @@ class CreateReleaseView(CreateAPIView):
         return serializer.save()
 
 
-class ReleaseByCatNumView(ListAPIView):
+class ReleaseByCatNumView(RetrieveAPIView):
     """
     api/release/cat_num/
     GET: access release by cataloge number
@@ -67,7 +67,7 @@ class ArtistByNiceNameView(ListAPIView):
     # queryset = Artist.objects.all()
 
     def get_queryset(self, *args, **kwargs):
-        nice_name = self.request.query_params.get('nice_name')
+        nice_name = self.kwargs['nice_name']
         return Artist.objects.filter(artist_nice_name=nice_name)
         # is the naming convention of nice_name interfering with query?
         # usually the underscore indicates a join...
