@@ -48,7 +48,9 @@ class CreateReleaseView(CreateAPIView):
 class ReleaseByCatNumView(RetrieveAPIView):
     """
     api/release/cat_num/
-    GET: access release by cataloge number
+    GET: access release by catalog number passed in url
+    *** Note that currently cat_num aligns with PK/ID. 
+    This will need to be adjusted to control for misalignments ***
     """
     serializer_class = ReleaseSerializer
     
@@ -60,14 +62,11 @@ class ReleaseByCatNumView(RetrieveAPIView):
 
 class ArtistByNiceNameView(ListAPIView):
     """
-    api/artist/???/
-    GET: access artist by nice name slug
+    api/artist/<str:nice_name>/
+    GET: access artist by nice name passed in url
     """
     serializer_class = ArtistSerializer
-    # queryset = Artist.objects.all()
 
     def get_queryset(self, *args, **kwargs):
-        nice_name = self.kwargs['nice_name']
+        nice_name = self.kwargs['artist_nice_name']
         return Artist.objects.filter(artist_nice_name=nice_name)
-        # is the naming convention of nice_name interfering with query?
-        # usually the underscore indicates a join...
