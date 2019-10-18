@@ -45,18 +45,15 @@ class CreateReleaseView(CreateAPIView):
         return serializer.save()
 
 
-class ReleaseByCatNumView(RetrieveAPIView):
+class ReleaseByCatNumView(ListAPIView):
     """
     api/release/cat_num/
     GET: access release by catalog number passed in url
-    *** Note that currently cat_num aligns with PK/ID. 
-    This will need to be adjusted to control for misalignments ***
     """
     serializer_class = ReleaseSerializer
     
-    def get_queryset(self):
-        raw_num = str(self.kwargs['pk'])
-        cat_num = 'TG-0'+raw_num
+    def get_queryset(self, *args, **kwargs):
+        cat_num = self.kwargs['cat_num']
         return Release.objects.filter(cat_num=cat_num)
 
 

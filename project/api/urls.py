@@ -19,5 +19,5 @@ urlpatterns = [
 
     path('release/', AllReleasesView.as_view(), name='release_list'),
     path('release/new/', CreateReleaseView.as_view(), name='new_release'),
-    path('release/<int:pk>/', ReleaseByCatNumView.as_view(), name='release_by_id')
+    path('release/<str:cat_num>/', ReleaseByCatNumView.as_view(), name='release_by_id')
 ]
