@@ -60,7 +60,7 @@ class Release(models.Model):
     tracklisting = models.TextField()
     bio = models.TextField(blank=True, null=True)
     ffo = models.TextField(blank=True, null=True)
-    target_markets = models.TextField()
+    target_markets = models.TextField(blank=True)
     upc = models.CharField(max_length=13, blank=True)
     status = models.CharField(max_length=20)
     mediaplayer_html = models.TextField(blank=True, null=True)
