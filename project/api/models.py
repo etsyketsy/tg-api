@@ -73,3 +73,16 @@ class Release(models.Model):
 
     def __str__(self):
         return self.cat_num
+
+
+class Track(models.Model):
+    title = models.CharField(max_length=150)
+    release = models.ForeignKey(
+        related_name='Tracks', 
+        to=Release, 
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    def __St__(self):
+        return self.title
