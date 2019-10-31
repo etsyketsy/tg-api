@@ -12,4 +12,4 @@ class ArtistSerializer(serializers.ModelSerializer):
 class ReleaseSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Release
-        fields = ['row', 'cat_num', 'fk_artist', 'release_title', 'release_formats', 'release_date', 'artist_nice_name', 'tracklisting', 'bio', 'ffo', 'target_markets', 'upc', 'status', 'mediaplayer_html', 'artist', 'image', 'id']
+        fields = ['row', 'cat_num', 'fk_artist', 'release_title', 'release_formats', 'release_date', 'artist_nice_name', 'tracks', 'bio', 'ffo', 'target_markets', 'upc', 'status', 'mediaplayer_html', 'artist', 'image', 'id']
