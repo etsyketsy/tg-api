@@ -15,11 +15,13 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class ReleaseSerializer(serializers.ModelSerializer):
-    tracks = serializers.SerializerMethodField(read_only=True)
+    tracks = TrackSerializer(many=True, read_only=True)
 
     def get_tracks(self, instance):
         if instance.tracks:
-            return instance.tracks.values_list('title', 'release')
+            return instance.tracks
+
+
 
     class Meta: 
         model = Release
