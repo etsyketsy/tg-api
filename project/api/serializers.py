@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Artist, Release
+from .models import Artist, Release, Track
+
+class TrackSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Track
+        fields = ['title', 'release']
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -10,6 +15,12 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class ReleaseSerializer(serializers.ModelSerializer):
+    tracks = serializers.SerializerMethodField(read_only=True)
+
+    def get_tracks(self, instance):
+        if instance.tracks:
+            return instance.tracks.values_list('title', 'release')
+
     class Meta: 
         model = Release
         fields = ['row', 'cat_num', 'fk_artist', 'release_title', 'release_formats', 'release_date', 'artist_nice_name', 'tracks', 'bio', 'ffo', 'target_markets', 'upc', 'status', 'mediaplayer_html', 'artist', 'image', 'id']
