@@ -65,7 +65,11 @@ class Release(models.Model):
     status = models.CharField(max_length=20)
     mediaplayer_html = models.TextField(blank=True, null=True)
     id = models.AutoField(primary_key=True)
-    artist = models.ManyToManyField('Artist', related_name='releases', blank=True)
+    artist = models.ManyToManyField(
+        'Artist', 
+        related_name='releases', 
+        blank=True
+    )
     image = models.ImageField(upload_to='releases/', blank=True, null=True)
     
     class Meta:
@@ -73,3 +77,16 @@ class Release(models.Model):
 
     def __str__(self):
         return self.cat_num
+
+
+class Track(models.Model):
+    title = models.CharField(max_length=150)
+    track_number = models.PositiveSmallIntegerField(blank=True, null=True)
+    release = models.ManyToManyField(
+        'Release', 
+        related_name='tracks', 
+        blank=True
+    )
+
+    def __str__(self):
+        return self.title
