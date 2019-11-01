@@ -81,6 +81,7 @@ class Release(models.Model):
 
 class Track(models.Model):
     title = models.CharField(max_length=150)
+    track_number = models.PositiveSmallIntegerField(blank=True, null=True)
     release = models.ManyToManyField(
         'Release', 
         related_name='tracks', 

@@ -4,7 +4,7 @@ from .models import Artist, Release, Track
 class TrackSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Track
-        fields = ['title', 'release']
+        fields = ['title', 'track_number']
 
 
 class ArtistSerializer(serializers.ModelSerializer):
