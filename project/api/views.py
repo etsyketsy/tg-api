@@ -1,16 +1,25 @@
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, CreateAPIView, GenericAPIView,     RetrieveAPIView 
+from rest_framework.generics import ListAPIView, CreateAPIView
 
-from project.api.serializers import ArtistSerializer, ReleaseSerializer
+from project.api.serializers import (
+    ArtistSerializer, 
+    ReleaseSerializer, 
+    ArtistNiceNameSerializer,
+    ArtistNameSerializer
+)
 from project.api.models import Artist, Release
 
 User = get_user_model()
 
 class AllArtistsView(ListAPIView):
     serializer_class = ArtistSerializer
+    queryset = Artist.objects.all()
+
+
+class AllArtistsNiceNameView(ListAPIView):
+    serializer_class = ArtistNiceNameSerializer
     queryset = Artist.objects.all()
 
 
