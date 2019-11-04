@@ -19,6 +19,11 @@ class ArtistNameSerializer(serializers.ModelSerializer):
         fields = ['artist']
 
 
+class ArtistNiceNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = ['artist_nice_name']
+
 class ReleaseSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True, read_only=True)
     artist = serializers.SerializerMethodField(read_only=True)
