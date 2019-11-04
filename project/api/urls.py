@@ -7,13 +7,15 @@ from project.api.views import (
     CreateReleaseView,
     ReleaseByCatNumView,
     ArtistByNiceNameView,
-    AllArtistsNiceNameView
+    AllArtistsNiceNameView,
+    AllReleasesCatNum
 )
     
 
 app_name = 'api'
 
 urlpatterns = [
+    # Artist endpoints
     path('artists/', AllArtistsView.as_view(), name='artist_list'),
     path('artists/new/', CreateArtistView.as_view(), name='new_artist'),
     path(
@@ -28,8 +30,14 @@ urlpatterns = [
         name='artist_by_nice_name'
     ),
 
+    # Release endpoints
     path('releases/', AllReleasesView.as_view(), name='release_list'),
     path('releases/new/', CreateReleaseView.as_view(), name='new_release'),
+    path(
+        'releases/check/', 
+        AllReleasesCatNum.as_view(), 
+        name='all_releases_cat_nums'
+    ),
     path(
         'releases/<str:cat_num>/', 
         ReleaseByCatNumView.as_view(), 

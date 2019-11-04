@@ -7,7 +7,8 @@ from project.api.serializers import (
     ArtistSerializer, 
     ReleaseSerializer, 
     ArtistNiceNameSerializer,
-    ArtistNameSerializer
+    ArtistNameSerializer,
+    ReleaseCatNumSerializer
 )
 from project.api.models import Artist, Release
 
@@ -22,6 +23,17 @@ class AllArtistsNiceNameView(ListAPIView):
     serializer_class = ArtistNiceNameSerializer
     queryset = Artist.objects.all()
 
+
+class ArtistByNiceNameView(ListAPIView):
+    """
+    api/artist/<str:nice_name>/
+    GET: access artist by nice name passed in url
+    """
+    serializer_class = ArtistSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        nice_name = self.kwargs['artist_nice_name']
+        return Artist.objects.filter(artist_nice_name=nice_name)
 
 class CreateArtistView(CreateAPIView):
     """
@@ -38,6 +50,11 @@ class CreateArtistView(CreateAPIView):
 
 class AllReleasesView(ListAPIView):
     serializer_class = ReleaseSerializer
+    queryset = Release.objects.all()
+
+
+class AllReleasesCatNum(ListAPIView):
+    serializer_class = ReleaseCatNumSerializer
     queryset = Release.objects.all()
 
 
@@ -66,13 +83,3 @@ class ReleaseByCatNumView(ListAPIView):
         return Release.objects.filter(cat_num=cat_num)
 
 
-class ArtistByNiceNameView(ListAPIView):
-    """
-    api/artist/<str:nice_name>/
-    GET: access artist by nice name passed in url
-    """
-    serializer_class = ArtistSerializer
-
-    def get_queryset(self, *args, **kwargs):
-        nice_name = self.kwargs['artist_nice_name']
-        return Artist.objects.filter(artist_nice_name=nice_name)

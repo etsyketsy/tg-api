@@ -24,6 +24,13 @@ class ArtistNiceNameSerializer(serializers.ModelSerializer):
         model = Artist
         fields = ['artist_nice_name']
 
+
+class ReleaseCatNumSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Release
+        fields = ['cat_num']
+
+
 class ReleaseSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True, read_only=True)
     artist = serializers.SerializerMethodField(read_only=True)
