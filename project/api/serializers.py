@@ -32,12 +32,13 @@ class ReleaseCatNumSerializer(serializers.ModelSerializer):
 
 
 class ReleaseSerializer(serializers.ModelSerializer):
-    tracks = TrackSerializer(many=True, read_only=True)
+    # -- Commenting out separate tracks field to utilize Tracklisting html from legacy database --
+    # tracks = TrackSerializer(many=True, read_only=True)
     artist = serializers.SerializerMethodField(read_only=True)
 
-    def get_tracks(self, instance):
-        if instance.tracks:
-            return instance.tracks
+    # def get_tracks(self, instance):
+    #     if instance.tracks:
+    #         return instance.tracks
 
     def get_artist(self, instance):
         if instance.artist:
@@ -45,4 +46,4 @@ class ReleaseSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Release
-        fields = ['row', 'cat_num', 'fk_artist', 'release_title', 'release_formats', 'release_date', 'artist_nice_name', 'tracks', 'bio', 'ffo', 'target_markets', 'upc', 'status', 'mediaplayer_html', 'artist', 'image', 'id']
+        fields = ['row', 'cat_num', 'fk_artist', 'release_title', 'release_formats', 'release_date', 'artist_nice_name', 'tracklisting', 'bio', 'ffo', 'target_markets', 'upc', 'status', 'mediaplayer_html', 'artist', 'image', 'id']
