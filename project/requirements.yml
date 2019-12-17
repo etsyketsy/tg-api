@@ -1,5 +1,4 @@
----
-name: tg-info
+name: tg-infotest
 channels:
   - conda-forge
 dependencies:
@@ -12,7 +11,7 @@ dependencies:
       - django==2.0.3
       - django-cors-headers==3.1.1
       - djangorestframework==3.7.7
-      - djangorestframework_simplejwt
+      - djangorestframework_simplejwt==4.3.0
       - flake8
       - mysqlclient==1.4.4
       - Pillow==6.2.0

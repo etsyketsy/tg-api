@@ -1,9 +1,22 @@
-FROM django 
+FROM continuumio/miniconda:4.4.10
 
-ADD ./project
+RUN apt-get update && apt-get install -qqy \
+    wget \
+    bzip2 \
+    libssl-dev \
+    openssh-server \
+    python3-dev \
+    default-libmysqlclient-dev \
+    gcc
 
-WORKDIR /my-django-app
+RUN mkdir -p /project | \
+    mkdir -p /media
 
-RUN pip install -r requirements.txt
 
-CMD ["python", "./manage.py runserve 0.0.0.0:8000"]
+COPY ./project/requirements.yml /project/requirements.yml
+
+RUN conda env create -f /project/requirements.yml
+
+COPY . .
+
+WORKDIR /project
