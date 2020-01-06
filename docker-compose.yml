@@ -1,14 +1,26 @@
 version: '3'
 
 services:
-    db:
+    database:
+        container_name: database
         image: mysql
-    web:
-        build: .
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-            - .:/project
+        restart: always
         ports:
-            - "8000:8000"
+            - "3308:3306"
+
+    project:
+        container_name: tg-info
+        build: .
+        restart: always
+        ports:
+        - "8090:8000"
+        - "4738:22"
+        command: "/usr/sbin/sshd -D"
         depends_on:
-            - db
+        - database
+        volumes:
+        - ./project:/project
+        - ./media-files:/media-files
+        - ./static-files:/static-files
+        - ./scripts:/scripts
+

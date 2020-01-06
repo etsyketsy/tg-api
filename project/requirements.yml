@@ -1,4 +1,4 @@
-name: tg-infotest
+name: tg-info
 channels:
   - conda-forge
 dependencies:
