@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'twelvega_tg',
-        'USER': 'root',
-        'PASSWORD': 'bochy666', # not prod pw!
+        'USER': 'api',
+        'PASSWORD': 'jA^uuQu!Ye87',
         'HOST': 'localhost',
         'PORT': '3306', 
     }
