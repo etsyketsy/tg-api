@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gy=k-s!e#01p%y_15dfyu9bokk#6&d^nk80=a!r-b(8iktj*x6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': 'twelvega_tg',
         'USER': 'api',
         'PASSWORD': 'jA^uuQu!Ye87',
-        'HOST': 'localhost',
-        'PORT': '3306', 
+        'HOST': '127.0.0.1',
+        'PORT': '', 
     }
 }
 
