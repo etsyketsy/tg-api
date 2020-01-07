@@ -22,7 +22,7 @@ SECRET_KEY = 'gy=k-s!e#01p%y_15dfyu9bokk#6&d^nk80=a!r-b(8iktj*x6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.99.84.148']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'USER': 'api',
         'PASSWORD': 'jA^uuQu!Ye87',
         'HOST': '127.0.0.1',
-        'PORT': '', 
+        'PORT': '',
     }
 }
 
@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Etc/GMT+1'
 
 USE_I18N = True
 
@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIS_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
