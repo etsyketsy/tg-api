@@ -22,7 +22,7 @@ SECRET_KEY = 'gy=k-s!e#01p%y_15dfyu9bokk#6&d^nk80=a!r-b(8iktj*x6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['167.99.84.148']
+ALLOWED_HOSTS = ['165.227.195.25', 'localhost']
 
 
 # Application definition
@@ -80,13 +80,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'twelvega_tg',
-        'USER': 'api',
-        'PASSWORD': 'jA^uuQu!Ye87',
-        'HOST': '127.0.0.1',
-        'PORT': '',
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }   
 }
 
 
@@ -127,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIS_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
