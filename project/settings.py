@@ -22,7 +22,7 @@ SECRET_KEY = 'gy=k-s!e#01p%y_15dfyu9bokk#6&d^nk80=a!r-b(8iktj*x6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['165.227.195.25', 'localhost']
+ALLOWED_HOSTS = ['35.203.10.192', 'localhost']
 
 
 # Application definition
@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'twelvega_tg',
+	'USER': 'api',
+	'PASSWORD': 'jA^uuQu!Ye87',
+	'HOST': 'localhost',
+	'PORT': '',
     }   
 }
 
@@ -110,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Etc/GMT+1'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
