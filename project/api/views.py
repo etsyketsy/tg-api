@@ -26,7 +26,7 @@ class AllArtistsNiceNameView(ListAPIView):
 
 class ArtistByNiceNameView(ListAPIView):
     """
-    api/artist/<str:nice_name>/
+    api/artists/<str:nice_name>/
     GET: access artist by nice name passed in url
     """
     serializer_class = ArtistSerializer
@@ -37,7 +37,7 @@ class ArtistByNiceNameView(ListAPIView):
 
 class CreateArtistView(CreateAPIView):
     """
-    api/artist/new/
+    api/artists/new/
     POST: user can create a new Artist entry by sending post data
     """
     serializer_class = ArtistSerializer
@@ -49,14 +49,33 @@ class CreateArtistView(CreateAPIView):
 
 
 class AllReleasesView(ListAPIView):
+    """
+    api/releases/
+    GET: See all releases 
+    """
     serializer_class = ReleaseSerializer
     queryset = Release.objects.all()
 
 
 class AllReleasesCatNum(ListAPIView):
+    """
+    api/releases/check/
+    GET: List cat_nums of all releases
+    """
     serializer_class = ReleaseCatNumSerializer
     queryset = Release.objects.all()
 
+class AllReleasesByArtist(ListAPIView):
+    """
+    api/releases/<str:nice_name>/
+    GET: List all releases by the artist nice name passed in url
+    """
+    serializer_class = ReleaseSerializer
+    queryset = Release.objects.all()
+
+    def get_queryset(self, *args, **kwargs):
+        nice_name = self.kwargs['artist_nice_name']
+        return Release.objects.filter(artist_nice_name=nice_name)
 
 class CreateReleaseView(CreateAPIView):
     """

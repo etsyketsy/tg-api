@@ -8,7 +8,8 @@ from project.api.views import (
     ReleaseByCatNumView,
     ArtistByNiceNameView,
     AllArtistsNiceNameView,
-    AllReleasesCatNum
+    AllReleasesCatNum,
+    AllReleasesByArtist
 )
     
 
@@ -43,4 +44,8 @@ urlpatterns = [
         ReleaseByCatNumView.as_view(), 
         name='release_by_id'
     ),
+    path(
+        'releases/artist/<str:artist_nice_name>/',
+        AllReleasesByArtist.as_view(),
+        name='releases_by_artist'),
 ]
